@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just Then | Official</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="transition-screen" id="transitionScreen"></div>
+
+  <nav class="side-nav">
+    <button onclick="showPage('home')">HOME</button>
+    <button onclick="showPage('music')">MUSIC</button>
+    <button onclick="showPage('artist')">ARTIST</button>
+    <button onclick="showPage('connect')">CONNECT</button>
+  </nav>
+
+  <main>
+    <section id="home" class="page active home-page">
+      <div class="home-bg"></div>
+      <div class="home-shade"></div>
+
+      <div class="home-title">
+        <h1>Just Then</h1>
+        <div class="home-line"></div>
+        <p>music project</p>
+      </div>
+    </section>
+
+    <section id="music" class="page music-page">
+      <div class="section-label">MUSIC ARCHIVE</div>
+
+      <div class="music-stage">
+        <article class="album-piece" onclick="openAlbum('single')">
+          <img src="single.png" alt="남겨진 온도">
+          <div class="album-info">
+            <span>DIGITAL SINGLE</span>
+            <h2>남겨진 온도</h2>
+          </div>
+        </article>
+
+        <article class="album-piece" onclick="openAlbum('ep')">
+          <img src="ep.jpg" alt="듣고 있다면">
+          <div class="album-info">
+            <span>EP</span>
+            <h2>듣고 있다면</h2>
+          </div>
+        </article>
+      </div>
+
+      <div class="listen-line">
+        <a href="https://open.spotify.com/artist/4r3S1zZM9Ex3g8uJQYJGVY" target="_blank">Spotify</a>
+        <a href="https://music.apple.com/kr/artist/just-then/1896189838" target="_blank">Apple Music</a>
+      </div>
+    </section>
+
+    <section id="artist" class="page artist-page">
+      <div class="artist-stage">
+        <div class="artist-photo">
+          <img src="artist-collage.jpg" alt="YU TAE JEONG">
+        </div>
+
+        <div class="artist-text">
+          <span>ARTIST</span>
+          <h2>YU TAE JEONG</h2>
+          <p class="role">Singer · Songwriter · Music Project Creator</p>
+
+          <p class="bio">
+            Just Then은 정유태의 개인 음악 프로젝트입니다.
+            지나간 순간보다 오래 남는 감정을 기록하며,
+            늦은 밤의 공기와 사라지지 않는 온도,
+            그리고 말하지 못한 마음들을 음악으로 남깁니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="connect" class="page connect-page">
+      <div class="connect-wrap">
+        <span>CONNECT</span>
+        <h2>Just Then</h2>
+
+        <div class="connect-links">
+          <a href="https://www.instagram.com/utee090/" target="_blank">Instagram</a>
+          <a href="https://open.spotify.com/artist/4r3S1zZM9Ex3g8uJQYJGVY" target="_blank">Spotify</a>
+          <a href="https://music.apple.com/kr/artist/just-then/1896189838" target="_blank">Apple Music</a>
+        </div>
+
+        <div class="release-block">
+          <span>LATEST RELEASE</span>
+          <p>남겨진 온도</p>
+          <p>듣고 있다면</p>
+        </div>
+
+        <footer>© 2026 Just Then</footer>
+      </div>
+    </section>
+  </main>
+
+  <div class="album-modal" id="albumModal">
+    <button class="close-btn" onclick="closeAlbum()">CLOSE</button>
+
+    <div class="modal-content" id="singleModal">
+      <img src="single.png" alt="남겨진 온도">
+      <div>
+        <span>DIGITAL SINGLE</span>
+        <h3>남겨진 온도</h3>
+        <p>시간이 지나도 남는 건 결국 너였어.</p>
+        <button onclick="playPreview('temp.wav')">▶ Preview</button>
+      </div>
+    </div>
+
+    <div class="modal-content" id="epModal">
+      <img src="ep.jpg" alt="듣고 있다면">
+      <div>
+        <span>EP</span>
+        <h3>듣고 있다면</h3>
+        <ul>
+          <li>01. 듣고 있다면 <button onclick="playPreview('listen.wav')">Preview</button></li>
+          <li>02. 닿지 못한 채 <button onclick="playPreview('reach.wav')">Preview</button></li>
+          <li>03. 말하지 못한 쪽 <button onclick="playPreview('words.wav')">Preview</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audioPlayer"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
