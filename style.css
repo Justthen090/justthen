@@ -374,10 +374,14 @@ footer {
 }
 
 .modal-content h3 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(54px, 7.5vw, 118px);
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: clamp(42px, 5vw, 76px);
   font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: 2px;
   margin: 14px 0 28px;
+  word-break: keep-all;
+  white-space: nowrap;
 }
 
 .modal-content p,
