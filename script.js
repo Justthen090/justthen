@@ -36,29 +36,21 @@ function openAlbum(type) {
   single.classList.remove("active");
   ep.classList.remove("active");
 
-  if (type === "single") {
-    single.classList.add("active");
-  }
-
-  if (type === "ep") {
-    ep.classList.add("active");
-  }
+  if (type === "single") single.classList.add("active");
+  if (type === "ep") ep.classList.add("active");
 
   modal.classList.add("active");
 }
 
 function closeAlbum() {
   const modal = document.getElementById("albumModal");
-
-  if (modal) {
-    modal.classList.remove("active");
-  }
-
+  if (modal) modal.classList.remove("active");
   stopAudio();
 }
 
 function playPreview(fileName) {
   const audio = document.getElementById("audioPlayer");
+  const startTime = previewStartTimes[fileName] || 0;
 
   if (currentAudio === fileName && !audio.paused) {
     stopAudio();
@@ -67,24 +59,30 @@ function playPreview(fileName) {
 
   clearTimeout(stopTimer);
 
+  audio.pause();
   audio.src = fileName;
-  audio.currentTime = previewStartTimes[fileName] || 0;
-  audio.play();
+  audio.load();
 
-  currentAudio = fileName;
+  audio.onloadedmetadata = function () {
+    audio.currentTime = startTime;
 
-  stopTimer = setTimeout(function () {
-    stopAudio();
-  }, 30000);
+    audio.play();
+
+    currentAudio = fileName;
+
+    stopTimer = setTimeout(function () {
+      stopAudio();
+    }, 30000);
+  };
 }
 
 function stopAudio() {
   const audio = document.getElementById("audioPlayer");
-
   if (!audio) return;
 
   audio.pause();
   audio.currentTime = 0;
+  audio.onloadedmetadata = null;
   currentAudio = null;
 
   clearTimeout(stopTimer);
