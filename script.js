@@ -2,10 +2,10 @@ let currentAudio = null;
 let stopTimer = null;
 
 const previewStartTimes = {
-  "temp.mp3": 92.5,
-  "listen.mp3": 72,
-  "reach.mp3": 63.5,
-  "words.mp3": 69
+  "temp.mp3": 0,
+  "listen.mp3": 0,
+  "reach.mp3": 0,
+  "words.mp3": 0
 };
 
 function showPage(pageId) {
