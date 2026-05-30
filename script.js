@@ -1,7 +1,6 @@
 let currentAudio = null;
-let stopTimer = null;
 
-const previewStartTimes = {
+const trackStartTimes = {
   "temp.mp3": 0,
   "listen.mp3": 0,
   "reach.mp3": 0,
@@ -59,14 +58,12 @@ function closeAlbum() {
 
 function playPreview(fileName) {
   const audio = document.getElementById("audioPlayer");
-  const startTime = previewStartTimes[fileName] || 0;
+  const startTime = trackStartTimes[fileName] || 0;
 
   if (currentAudio === fileName && !audio.paused) {
     stopAudio();
     return;
   }
-
-  clearTimeout(stopTimer);
 
   audio.pause();
   audio.src = fileName;
@@ -75,12 +72,11 @@ function playPreview(fileName) {
   audio.onloadedmetadata = function () {
     audio.currentTime = startTime;
     audio.play();
-
     currentAudio = fileName;
+  };
 
-    stopTimer = setTimeout(function () {
-      stopAudio();
-    }, 30000);
+  audio.onended = function () {
+    currentAudio = null;
   };
 }
 
@@ -92,7 +88,6 @@ function stopAudio() {
   audio.pause();
   audio.currentTime = 0;
   audio.onloadedmetadata = null;
+  audio.onended = null;
   currentAudio = null;
-
-  clearTimeout(stopTimer);
 }
