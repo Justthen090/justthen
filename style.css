@@ -43,7 +43,7 @@ body {
   position: fixed;
   left: 42px;
   bottom: 42px;
-  z-index: 120;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -53,7 +53,7 @@ body {
 .side-nav button {
   background: none;
   border: none;
-  color: rgba(242,236,227,.48);
+  color: rgba(242,236,227,.55);
   font-size: 11px;
   letter-spacing: 4px;
   cursor: pointer;
@@ -80,6 +80,14 @@ body {
   visibility: visible;
 }
 
+.home-page,
+.music-page,
+.artist-page,
+.connect-page {
+  position: fixed;
+  inset: 0;
+}
+
 .home-bg {
   position: absolute;
   inset: 0;
@@ -104,6 +112,7 @@ body {
   transform: translate(-50%,-50%);
   text-align: center;
   animation: rise .9s ease forwards;
+  z-index: 5;
 }
 
 .home-title h1 {
@@ -143,14 +152,17 @@ body {
   letter-spacing: 8px;
   color: rgba(242,236,227,.46);
   font-size: 11px;
+  z-index: 5;
 }
 
 .music-stage {
-  min-height: 100vh;
-  padding: 150px 8vw 120px;
+  min-height: calc(100vh - 120px);
+  padding: 150px 8vw 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 46px;
+  position: relative;
+  z-index: 1;
 }
 
 .album-piece {
@@ -194,7 +206,6 @@ body {
 .album-info span,
 .artist-text span,
 .connect-wrap > span,
-.modal-content > span,
 .modal-text > span,
 .release-block span {
   letter-spacing: 7px;
@@ -210,11 +221,12 @@ body {
 }
 
 .listen-line {
-  position: absolute;
-  right: 8vw;
-  bottom: 44px;
+  position: relative;
+  z-index: 10;
   display: flex;
-  gap: 34px;
+  justify-content: center;
+  gap: 40px;
+  margin: 8px auto 60px;
 }
 
 .listen-line a,
@@ -246,6 +258,8 @@ body {
   grid-template-columns: 1.15fr .85fr;
   gap: 70px;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .artist-photo {
@@ -255,6 +269,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .artist-photo img {
@@ -262,6 +278,11 @@ body {
   height: 100%;
   object-fit: contain;
   filter: brightness(.86) contrast(1.06) saturate(.86);
+}
+
+.artist-text {
+  position: relative;
+  z-index: 2;
 }
 
 .artist-text h2 {
@@ -298,6 +319,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .connect-wrap h2 {
@@ -341,7 +364,7 @@ footer {
   position: fixed;
   inset: 0;
   background: rgba(5,5,5,.96);
-  z-index: 300;
+  z-index: 10000;
   opacity: 0;
   visibility: hidden;
   transition: .45s;
@@ -367,7 +390,7 @@ footer {
   color: rgba(242,236,227,.65);
   letter-spacing: 4px;
   cursor: pointer;
-  z-index: 350;
+  z-index: 10001;
 }
 
 .modal-content {
@@ -499,6 +522,7 @@ button {
     flex-direction: row;
     justify-content: space-between;
     gap: 0;
+    z-index: 9999;
   }
 
   .side-nav button {
@@ -525,7 +549,7 @@ button {
   .music-stage {
     grid-template-columns: 1fr;
     min-height: auto;
-    padding: 116px 6vw 150px;
+    padding: 116px 6vw 40px;
     gap: 34px;
   }
 
@@ -544,10 +568,9 @@ button {
   }
 
   .listen-line {
-    position: static;
-    margin: -106px 6vw 150px;
-    display: flex;
+    position: relative;
     justify-content: center;
+    margin: 10px 6vw 150px;
     gap: 28px;
   }
 
