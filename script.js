@@ -2,7 +2,7 @@ let currentAudio = null;
 let stopTimer = null;
 
 const previewStartTimes = {
-  "temp.mp3": 93,
+  "temp.mp3": 93.2,
   "listen.mp3": 72,
   "reach.mp3": 63.5,
   "words.mp3": 69
