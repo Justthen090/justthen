@@ -2,7 +2,7 @@ let currentAudio = null;
 let stopTimer = null;
 
 const previewStartTimes = {
-  "temp.mp3": 92.7,
+  "temp.mp3": 92.5,
   "listen.mp3": 72,
   "reach.mp3": 63.5,
   "words.mp3": 69
@@ -36,15 +36,24 @@ function openAlbum(type) {
   single.classList.remove("active");
   ep.classList.remove("active");
 
-  if (type === "single") single.classList.add("active");
-  if (type === "ep") ep.classList.add("active");
+  if (type === "single") {
+    single.classList.add("active");
+  }
+
+  if (type === "ep") {
+    ep.classList.add("active");
+  }
 
   modal.classList.add("active");
 }
 
 function closeAlbum() {
   const modal = document.getElementById("albumModal");
-  if (modal) modal.classList.remove("active");
+
+  if (modal) {
+    modal.classList.remove("active");
+  }
+
   stopAudio();
 }
 
@@ -65,7 +74,6 @@ function playPreview(fileName) {
 
   audio.onloadedmetadata = function () {
     audio.currentTime = startTime;
-
     audio.play();
 
     currentAudio = fileName;
@@ -78,6 +86,7 @@ function playPreview(fileName) {
 
 function stopAudio() {
   const audio = document.getElementById("audioPlayer");
+
   if (!audio) return;
 
   audio.pause();
