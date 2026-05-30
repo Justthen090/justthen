@@ -2,12 +2,17 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  min-height: 100%;
   background: #090909;
   color: #f2ece3;
-  overflow: hidden;
   font-family: "Noto Sans KR", sans-serif;
+}
+
+body {
+  overflow: hidden;
 }
 
 .grain {
@@ -66,6 +71,8 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: opacity .8s ease, visibility .8s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .page.active {
@@ -93,6 +100,7 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
+  width: 90%;
   transform: translate(-50%,-50%);
   text-align: center;
   animation: rise .9s ease forwards;
@@ -100,7 +108,7 @@ body {
 
 .home-title h1 {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(82px, 10vw, 142px);
+  font-size: clamp(72px, 10vw, 142px);
   font-weight: 300;
   font-style: italic;
   margin: 0;
@@ -138,8 +146,8 @@ body {
 }
 
 .music-stage {
-  height: 100vh;
-  padding: 150px 8vw 110px;
+  min-height: 100vh;
+  padding: 150px 8vw 120px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 46px;
@@ -147,6 +155,7 @@ body {
 
 .album-piece {
   position: relative;
+  min-height: 58vh;
   overflow: hidden;
   cursor: pointer;
   background: #111;
@@ -184,8 +193,10 @@ body {
 
 .album-info span,
 .artist-text span,
-.connect-wrap span,
-.modal-content span {
+.connect-wrap > span,
+.modal-content > span,
+.modal-text > span,
+.release-block span {
   letter-spacing: 7px;
   font-size: 11px;
   color: rgba(242,236,227,.52);
@@ -229,8 +240,8 @@ body {
 }
 
 .artist-stage {
-  height: 100vh;
-  padding: 88px 8vw;
+  min-height: 100vh;
+  padding: 88px 8vw 110px;
   display: grid;
   grid-template-columns: 1.15fr .85fr;
   gap: 70px;
@@ -238,7 +249,7 @@ body {
 }
 
 .artist-photo {
-  height: 78vh;
+  min-height: 78vh;
   background: #050505;
   box-shadow: 0 42px 110px rgba(0,0,0,.6);
   display: flex;
@@ -282,8 +293,8 @@ body {
 }
 
 .connect-wrap {
-  height: 100vh;
-  padding-left: 12vw;
+  min-height: 100vh;
+  padding: 120px 8vw 120px 12vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -339,6 +350,7 @@ footer {
   justify-content: center;
   padding: 8vw;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .album-modal.active {
@@ -375,6 +387,10 @@ footer {
   box-shadow: 0 40px 100px rgba(0,0,0,.7);
 }
 
+.modal-text {
+  min-width: 0;
+}
+
 .modal-content h3 {
   font-family: "Noto Sans KR", sans-serif;
   font-size: 48px;
@@ -387,23 +403,17 @@ footer {
   overflow-wrap: normal;
 }
 
-.modal-content p,
-.modal-content li {
+.modal-content p {
   color: rgba(242,236,227,.7);
   line-height: 2;
   letter-spacing: 2px;
 }
 
-.modal-content > div {
-  min-width: 520px;
-}
-
 .modal-content button {
-  margin-left: 14px;
   background: none;
   border: 1px solid rgba(242,236,227,.38);
   color: #f2ece3;
-  padding: 9px 18px;
+  padding: 10px 20px;
   letter-spacing: 3px;
   cursor: pointer;
   transition: .35s;
@@ -412,6 +422,38 @@ footer {
 .modal-content button:hover {
   background: #f2ece3;
   color: #090909;
+}
+
+.track-preview-list {
+  list-style: none;
+  padding: 0;
+  margin: 34px 0 0;
+}
+
+.track-preview-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 18px;
+  color: rgba(242,236,227,.72);
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  word-break: keep-all;
+}
+
+.track-preview-list li span {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.track-preview-list button {
+  width: 140px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  letter-spacing: 3px;
 }
 
 button {
@@ -438,56 +480,143 @@ button {
   }
 }
 
-/* 모바일 */
 @media (max-width: 850px) {
   body {
-    overflow: auto;
+    overflow: hidden;
   }
 
   .side-nav {
     left: 50%;
-    bottom: 22px;
+    right: auto;
+    bottom: 18px;
     transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 460px;
+    padding: 14px 18px;
+    border: 1px solid rgba(242,236,227,.08);
+    background: rgba(5,5,5,.72);
+    backdrop-filter: blur(8px);
     flex-direction: row;
-    gap: 12px;
+    justify-content: space-between;
+    gap: 0;
   }
 
   .side-nav button {
     font-size: 10px;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
   }
 
-  .music-stage,
-  .artist-stage {
+  .home-title h1 {
+    font-size: clamp(68px, 22vw, 104px);
+  }
+
+  .home-title p {
+    font-size: 10px;
+    letter-spacing: 5px;
+  }
+
+  .section-label {
+    top: 72px;
+    left: 6vw;
+    font-size: 10px;
+    letter-spacing: 5px;
+  }
+
+  .music-stage {
     grid-template-columns: 1fr;
-    height: auto;
-    min-height: 100vh;
-    padding: 92px 6vw 100px;
+    min-height: auto;
+    padding: 116px 6vw 150px;
+    gap: 34px;
   }
 
   .album-piece {
-    height: 48vh;
+    min-height: auto;
+    aspect-ratio: 1 / 1;
   }
 
-  .artist-photo {
-    height: auto;
+  .album-info {
+    opacity: 1;
+    padding: 28px;
   }
 
-  .connect-wrap {
-    height: auto;
-    min-height: 100vh;
-    padding: 92px 6vw 100px;
-    padding-left: 6vw;
+  .album-info h2 {
+    font-size: 42px;
   }
 
   .listen-line {
     position: static;
-    margin: 0 6vw 110px;
+    margin: -106px 6vw 150px;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+  }
+
+  .listen-line a {
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .artist-stage {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 86px 6vw 150px;
+    gap: 36px;
+  }
+
+  .artist-photo {
+    min-height: auto;
+  }
+
+  .artist-photo img {
+    height: auto;
+  }
+
+  .artist-text h2 {
+    font-size: 42px;
+  }
+
+  .bio {
+    font-size: 14px;
+  }
+
+  .connect-wrap {
+    min-height: 100vh;
+    padding: 100px 6vw 150px;
+    justify-content: center;
+  }
+
+  .connect-wrap h2 {
+    font-size: 72px;
+  }
+
+  .connect-links {
+    gap: 24px;
+  }
+
+  .connect-links a {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
+  .release-block {
+    margin-top: 58px;
+  }
+
+  footer {
+    margin-top: 58px;
+    font-size: 12px;
   }
 
   .album-modal {
     align-items: flex-start;
-    padding: 96px 8vw 120px;
+    justify-content: flex-start;
+    padding: 92px 6vw 120px;
+  }
+
+  .close-btn {
+    top: 28px;
+    right: 28px;
+    font-size: 12px;
   }
 
   .modal-content {
@@ -496,43 +625,51 @@ button {
     gap: 34px;
   }
 
-  .modal-content > div {
-    min-width: 0;
+  .modal-content img {
+    width: 100%;
   }
 
   .modal-content h3 {
-    font-size: 42px;
-    white-space: normal;
-    word-break: keep-all;
-  }
-
-  #singleModal h3 {
+    font-size: 40px;
     white-space: nowrap;
   }
 
-  #epModal ul {
-    list-style: none;
-    padding: 0;
-    margin: 30px 0 0;
+  .modal-content p {
+    font-size: 17px;
+    line-height: 1.9;
   }
 
-  #epModal li {
-    display: grid;
-    grid-template-columns: 1fr;
+  .track-preview-list {
+    margin-top: 28px;
+  }
+
+  .track-preview-list li {
+    grid-template-columns: minmax(0, 1fr) 118px;
     gap: 12px;
-    margin-bottom: 22px;
-    font-size: 22px;
-    line-height: 1.4;
-    letter-spacing: 1px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+
+  .track-preview-list li span {
     white-space: nowrap;
   }
 
-  #epModal li button {
-    margin: 0;
-    width: 190px;
-    height: 58px;
+  .track-preview-list button {
+    width: 118px;
+    height: 46px;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 380px) {
+  .track-preview-list li {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .track-preview-list button {
     justify-self: start;
-    font-size: 15px;
-    letter-spacing: 4px;
   }
 }
