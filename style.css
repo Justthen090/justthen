@@ -498,7 +498,40 @@ button {
   .album-modal .modal-content > div {
     min-width: 0 !important;
   }
+.album-modal .modal-content {
+  grid-template-columns: 420px minmax(520px, 1fr) !important;
+  width: min(1200px, 92vw) !important;
+}
 
+.album-modal .modal-content h3 {
+  font-family: "Noto Sans KR", sans-serif !important;
+  font-size: 48px !important;
+  font-weight: 300 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -1px !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+}
+
+.album-modal .modal-content > div {
+  min-width: 520px !important;
+}
+
+@media (max-width: 850px) {
+  .album-modal .modal-content {
+    grid-template-columns: 1fr !important;
+  }
+
+  .album-modal .modal-content > div {
+    min-width: 0 !important;
+  }
+
+  .album-modal .modal-content h3 {
+    font-size: 38px !important;
+    white-space: normal !important;
+  }
+}
   .album-modal .modal-content h3 {
     font-size: 38px !important;
     white-space: normal !important;
