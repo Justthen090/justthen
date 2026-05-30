@@ -338,6 +338,7 @@ footer {
   align-items: center;
   justify-content: center;
   padding: 8vw;
+  overflow-y: auto;
 }
 
 .album-modal.active {
@@ -354,14 +355,15 @@ footer {
   color: rgba(242,236,227,.65);
   letter-spacing: 4px;
   cursor: pointer;
+  z-index: 350;
 }
 
 .modal-content {
   display: none;
-  grid-template-columns: .8fr 1fr;
+  grid-template-columns: 420px minmax(520px, 1fr);
   gap: 60px;
   align-items: center;
-  width: min(1100px, 100%);
+  width: min(1200px, 92vw);
 }
 
 .modal-content.active {
@@ -375,13 +377,14 @@ footer {
 
 .modal-content h3 {
   font-family: "Noto Sans KR", sans-serif;
-  font-size: clamp(42px, 5vw, 76px);
+  font-size: 48px;
   font-weight: 300;
-  line-height: 1.25;
-  letter-spacing: 2px;
+  line-height: 1.2;
+  letter-spacing: -1px;
   margin: 14px 0 28px;
   word-break: keep-all;
   white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .modal-content p,
@@ -389,6 +392,10 @@ footer {
   color: rgba(242,236,227,.7);
   line-height: 2;
   letter-spacing: 2px;
+}
+
+.modal-content > div {
+  min-width: 520px;
 }
 
 .modal-content button {
@@ -412,15 +419,26 @@ button {
 }
 
 @keyframes slowMove {
-  from { transform: scale(1.03) translate(0,0); }
-  to { transform: scale(1.10) translate(-10px,8px); }
+  from {
+    transform: scale(1.03) translate(0,0);
+  }
+  to {
+    transform: scale(1.10) translate(-10px,8px);
+  }
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translate(-50%,-45%); }
-  to { opacity: 1; transform: translate(-50%,-50%); }
+  from {
+    opacity: 0;
+    transform: translate(-50%,-45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%,-50%);
+  }
 }
 
+/* 모바일 */
 @media (max-width: 850px) {
   body {
     overflow: auto;
@@ -440,14 +458,8 @@ button {
   }
 
   .music-stage,
-  .artist-stage,
-  .modal-content {
+  .artist-stage {
     grid-template-columns: 1fr;
-  }
-
-  .music-stage,
-  .artist-stage,
-  .connect-wrap {
     height: auto;
     min-height: 100vh;
     padding: 92px 6vw 100px;
@@ -462,6 +474,9 @@ button {
   }
 
   .connect-wrap {
+    height: auto;
+    min-height: 100vh;
+    padding: 92px 6vw 100px;
     padding-left: 6vw;
   }
 
@@ -469,71 +484,55 @@ button {
     position: static;
     margin: 0 6vw 110px;
   }
-}
-.album-modal .modal-content {
-  grid-template-columns: 420px minmax(520px, 1fr) !important;
-  width: min(1200px, 92vw) !important;
-}
 
-.album-modal .modal-content h3 {
-  font-family: "Noto Sans KR", sans-serif !important;
-  font-size: 48px !important;
-  font-weight: 300 !important;
-  line-height: 1.2 !important;
-  letter-spacing: -1px !important;
-  white-space: nowrap !important;
-  word-break: keep-all !important;
-  overflow-wrap: normal !important;
-}
-
-.album-modal .modal-content > div {
-  min-width: 520px !important;
-}
-
-@media (max-width: 850px) {
-  .album-modal .modal-content {
-    grid-template-columns: 1fr !important;
+  .album-modal {
+    align-items: flex-start;
+    padding: 96px 8vw 120px;
   }
 
-  .album-modal .modal-content > div {
-    min-width: 0 !important;
-  }
-.album-modal .modal-content {
-  grid-template-columns: 420px minmax(520px, 1fr) !important;
-  width: min(1200px, 92vw) !important;
-}
-
-.album-modal .modal-content h3 {
-  font-family: "Noto Sans KR", sans-serif !important;
-  font-size: 48px !important;
-  font-weight: 300 !important;
-  line-height: 1.2 !important;
-  letter-spacing: -1px !important;
-  white-space: nowrap !important;
-  word-break: keep-all !important;
-  overflow-wrap: normal !important;
-}
-
-.album-modal .modal-content > div {
-  min-width: 520px !important;
-}
-
-@media (max-width: 850px) {
-  .album-modal .modal-content {
-    grid-template-columns: 1fr !important;
+  .modal-content {
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 34px;
   }
 
-  .album-modal .modal-content > div {
-    min-width: 0 !important;
+  .modal-content > div {
+    min-width: 0;
   }
 
-  .album-modal .modal-content h3 {
-    font-size: 38px !important;
-    white-space: normal !important;
+  .modal-content h3 {
+    font-size: 42px;
+    white-space: normal;
+    word-break: keep-all;
   }
-}
-  .album-modal .modal-content h3 {
-    font-size: 38px !important;
-    white-space: normal !important;
+
+  #singleModal h3 {
+    white-space: nowrap;
+  }
+
+  #epModal ul {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0 0;
+  }
+
+  #epModal li {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+    font-size: 22px;
+    line-height: 1.4;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  #epModal li button {
+    margin: 0;
+    width: 190px;
+    height: 58px;
+    justify-self: start;
+    font-size: 15px;
+    letter-spacing: 4px;
   }
 }
